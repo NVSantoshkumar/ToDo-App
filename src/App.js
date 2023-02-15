@@ -18,15 +18,18 @@ function App() {
     setInputValue("");
   };
 
+  const onDelete = (rowIndex) => {
+    store.splice(rowIndex, 1);
+    setStore([...store]);
+  };
+
   return (
     <div>
       <div>
         <Navbar bg="primary" variant="dark">
           <Container>
             <Navbar.Brand href="#home">
-              <p class="text-center">
-                <h1>WebSite To-Do</h1>
-              </p>
+              <h2>To Do App</h2>
             </Navbar.Brand>
             <Nav className="me-auto"></Nav>
           </Container>
@@ -57,13 +60,36 @@ function App() {
         </Container>
       </div>
 
-      <ListGroup.Item variant="success">
-        <div>
-          {store.map((ele) => (
-            <h1>{ele}</h1>
+      <div className="m-4">
+        <ListGroup>
+          {store.map((ele, index) => (
+            <Container key={`row-${index}`}>
+              <Row>
+                <Col sm={10}>
+                  <ListGroup.Item variant="success" className="m-2">
+                    <h5 className="m-10">
+                      {index + 1}. {ele}
+                    </h5>
+                  </ListGroup.Item>
+                </Col>
+                <Col
+                  sm={2}
+                  className="d-flex align-items-center justify-content-sm-center"
+                >
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      onDelete(index);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
           ))}
-        </div>
-      </ListGroup.Item>
+        </ListGroup>
+      </div>
     </div>
   );
 }
