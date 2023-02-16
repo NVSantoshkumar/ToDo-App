@@ -15,7 +15,7 @@ function App() {
   };
 
   const onAdd = () => {
-    if (inputValue == "") {
+    if (inputValue == null || inputValue == "") {
       alert("Please enter the Note. Can’t be blank or empty !!!");
     } else {
       setStore([...store, inputValue]);
