@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function App() {
-  let [inputValue, setInputValue] = useState("");
+  let [inputValue, setInputValue] = useState();
   let [store, setStore] = useState([]);
 
   let inputChange = (e) => {
@@ -14,7 +14,13 @@ function App() {
   };
 
   const onAdd = () => {
-    setStore([...store, inputValue]);
+    if (inputValue == null || inputValue == "") {
+      alert("Please enter the Note. Can’t be blank or empty !!!");
+
+      return false;
+    } else {
+      setStore([...store, inputValue]);
+    }
     setInputValue("");
   };
 
