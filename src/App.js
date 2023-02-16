@@ -8,20 +8,23 @@ import Navbar from "react-bootstrap/Navbar";
 function App() {
   let [inputValue, setInputValue] = useState();
   let [store, setStore] = useState([]);
+  const [isChecked, setIsChecked] = useState();
 
   let inputChange = (e) => {
     setInputValue(e.target.value); //inputValue = e.target.value;
   };
 
   const onAdd = () => {
-    if (inputValue == null || inputValue == "") {
+    if (inputValue == "") {
       alert("Please enter the Note. Can’t be blank or empty !!!");
-
-      return false;
     } else {
       setStore([...store, inputValue]);
     }
     setInputValue("");
+  };
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
   };
 
   const onDelete = (rowIndex) => {
@@ -74,6 +77,14 @@ function App() {
                 <Col sm={10}>
                   <ListGroup.Item variant="success" className="m-2">
                     <h5 className="m-10">
+                      <Form>
+                        <Form.Check
+                          type="checkbox"
+                          label=""
+                          checked={isChecked}
+                          // onChange={handleCheckboxChange}
+                        />
+                      </Form>
                       {index + 1}. {ele}
                     </h5>
                   </ListGroup.Item>
