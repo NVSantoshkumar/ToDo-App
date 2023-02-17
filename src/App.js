@@ -7,7 +7,9 @@ import Navbar from "react-bootstrap/Navbar";
 
 function App() {
   let [inputValue, setInputValue] = useState();
-  let [store, setStore] = useState([]);
+  let x = JSON.parse(localStorage.getItem("dataKey"));
+
+  let [store, setStore] = useState([...x]);
   const [isChecked, setIsChecked] = useState();
 
   let inputChange = (e) => {
@@ -18,9 +20,11 @@ function App() {
     if (inputValue == null || inputValue == "") {
       alert("Please enter the Note. Can’t be blank or empty !!!");
     } else {
-      setStore([...store, inputValue]);
+      let data = [...store, inputValue];
+      setStore(data);
+      setInputValue("");
+      localStorage.setItem("dataKey", JSON.stringify(data));
     }
-    setInputValue("");
   };
 
   const handleCheckboxChange = (event) => {
